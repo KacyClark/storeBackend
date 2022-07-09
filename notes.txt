@@ -16,3 +16,25 @@ venv\Scripts\activate
 
 # install flask
 py -m pip install flask
+
+
+################################################################
+###################GIT COMMANDS#################################
+################################################################
+
+# start project
+git init
+
+# set the remote url
+git remote add origin <url>
+
+# local copy
+git add .
+git commit -m "Any Message"
+
+# upload to Github
+# first time:
+git push -u origin master/main
+
+# next time:
+git push
