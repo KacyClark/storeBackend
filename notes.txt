@@ -1,0 +1,18 @@
+# checking pip version
+py -m pip --version
+
+
+# install venv
+py -m pip install virtualenv
+
+
+# created a virtual env
+py -m venv venv
+
+
+# activate virtual env
+venv\Scripts\activate
+
+
+# install flask
+py -m pip install flask
