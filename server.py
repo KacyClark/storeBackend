@@ -1,6 +1,7 @@
-from flask import Flask
+from flask import Flask, request
 from about import me
 from data import mock_data
+import random 
 import json
 
 
@@ -49,13 +50,20 @@ def about_json():
     def get_products():
         return json.dumps(mock_data)
 
+@app.post("/api/products")
+def save_product():
+    product=request.get_json()     #  add product to mock_data
+    mock_data.append(product)      #  assign id to the product
+    product["id"] = random.randrange(1, 893214789)            #  return the product as json
+        return json.dumps(product)
+        print(data)
 
 @app.get("api/products/<id>")
 def get_product_by_id(id): 
     for prod in mock_data:
-       if prod["id"] == id:
+       if str(prod["id"]) == id:
           return json.dumps(prod)
-          return "Not Found"
+    return "Not Found"
 
 
     # travel mock_data list
@@ -91,11 +99,6 @@ def get_cheapest():
             solution = prod
     return json.dumps(solution)
 
-
-    
-
-      
-
 # GET /api/categories
 # # return list of categories
 # 1 return OK
@@ -110,5 +113,32 @@ def get_categories():
         categories.append(product["category"])
     return json.dumps(categories)
 
+    #  get return number of prods in catelog (mock_data)
+    #  /api/count_products
+@app.get("/api/count_products")
+def get_products_count():
+    count = len(mock_data)
+    return json.dumps({"count": count})\
+
+    #  get /api/search/<text>
+    #  return all prods whose title contains text
+@app.get("api/search/<text>")
+def search_products(text):
+    results = []
+    for prod in mock_data:
+    text = text.lower()   
+        if text in prod["title"].lower():
+            results.append(prod) 
+
+
+
+
+    
+
+      
+
+
 
 app.run(debug=True)
+    
+
