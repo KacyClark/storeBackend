@@ -35,14 +35,19 @@ def about():
 
 @app.get("/api/version")
 def version():
-    return "1.0"
+    return "1.1"
 
 
 #get /api/about
 #return first lastname
-@app.get("/api/about")
+@app.get("/api/about2")
 def about_json():
     return json.dumps(me)   # parse the dict into a json string
+
+
+@app.get("/api/ping")
+def ping():
+    return "pong"
 
 def fix_mongo_id(obj):
     obj["id"] = str(obj["_id"])
@@ -56,6 +61,7 @@ def get_products():
     for prod in cursor:
         fix_mongo_id(prod)
         results.append(prod)
+        
     return json.dumps(results)
 
 @app.post("/api/products")
@@ -67,7 +73,7 @@ def save_product():
     
     return json.dumps(product)
 
-@app.get("api/products/<id>")
+@app.get("/api/products/<id>")
 def get_product_by_id(id): 
     for prod in mock_data:
        if str(prod["id"]) == id:
@@ -126,10 +132,10 @@ def get_products_count():
     cursor = db.products.find({})
     count = 0
     for product in cursor:  
-        count = count +=1
-    return json.dumps({"count": count})\
+        count = count +1
+    return json.dumps({"count": count})
 
-@app.get("api/search/<text>")
+@app.get("/api/search/<text>")
 def search_products(text):
     results = []
     text = text.lower()   

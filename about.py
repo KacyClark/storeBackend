@@ -4,7 +4,7 @@ app = Flask("server")
 me = {
 
     "first": "Kacy",
-    "last": "Clark",
+    "last": "Clark v2",
     "age": 39,
     "hobbies": [],
     "address": {
@@ -29,34 +29,3 @@ me = {
 
     # get /api/about
     # return first last name
-
-@app.get("/api/about")
-def about():
-    return me["first"] + " " + me["last"]
-    return f'{me["first"]} {me["last"]}'
-
-
-#add new keys
-me["preferred_color"] = "Black"
-print(me)
-
-    # read if exists
-if "middle_name" in me:
-    print(me["middle_name"])
-
-#print the full address on a single line
-    print(me["number"] + " " + me["street"] + " " + me["city"] + " " + me["state"] + " " + me["zip"])
-    address = me["address"]
-    print(address)
-    print(type(address))
-
-    # print(f'{address["number"]}, {address["street"]}, {address["city"]}, {address["state"]}, {address["zip"]}')
-
-
-
-
-
-
-
-
-app.run(debug=True)
