@@ -1,13 +1,15 @@
+# from bson import ObjectId
 from flask import Flask, request
 from about import me
 from data import mock_data
 import random 
 import json
-from config import db 
+from config import db
+from flask_cors import CORS
 
-
-print("hello from server")
 app = Flask("server")
+CORS(app)     #allows request from any origin
+
 
 @app.get('/')
 def home():
